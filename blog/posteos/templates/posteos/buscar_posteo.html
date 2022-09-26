@@ -1,0 +1,23 @@
+{% extends "app_super/padre.html" %}
+
+{% load static %}
+    
+{% block primero %}
+    
+{% if nombres %}
+    <ul>
+        {% for nom in nombres %}
+            <p>
+                <br>Nombre: <b>{{nom.nombre}}</b>
+                <br>Apellido: <b>{{nom.apellido}}</b>
+                <br>Teléfono: <b>{{nom.telefono}}</b>
+                <br>E-mail: <b>{{nom.email}}</b>
+            </p>
+        {% endfor %}
+    </ul>
+{% else %}
+<p>No se encontraron clientes.</p>
+
+{% endif %}
+     
+{% endblock %}

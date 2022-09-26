@@ -1,0 +1,18 @@
+{% extends "app_super/padre.html" %}
+
+{% load static %}
+
+{% block primero %}
+
+<h2><b>Estos son todos los clientes:</b></h2>
+    
+    {% for cliente in lista_clientes %}
+    <p>
+        <br>Nombre: <b>{{cliente.nombre}}</b>
+        <br>Apellido: <b>{{cliente.apellido}}</b>
+        <br>Teléfono: <b>{{cliente.telefono}}</b>
+        <br>E-mail: <b>{{cliente.email}}</b>
+    </p>
+    {% endfor %}
+
+{% endblock %}
