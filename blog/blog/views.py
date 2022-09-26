@@ -3,7 +3,7 @@ from django.shortcuts import render
 from blog.models import *
 from blog.forms import *
 from django.urls import reverse_lazy
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
 
