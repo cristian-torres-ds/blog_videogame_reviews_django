@@ -1,0 +1,22 @@
+{% extends "app_super/padre.html" %}
+
+{% load static %}
+
+{% block titulo %}
+
+Añadir Avatar
+
+{% endblock %}
+
+{% block primero %}
+
+<h2>Añadir Avatar.</h2>
+
+<form action="{% url 'add_avatar' %}" method="POST" enctype="multipart/form-data"> {% csrf_token %}
+        <table>
+            {{ mi_formulario.as_table }}
+        </table>
+        <button type="submit">Guardar</button>
+    </form>
+
+{% endblock %}

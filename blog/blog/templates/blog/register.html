@@ -1,0 +1,25 @@
+{% extends "app_super/padre.html" %}
+
+{% load static %}
+
+{% block titulo %}
+
+REGISTRO
+
+{% endblock %}
+
+{% block primero %}
+
+<h2>Registrarse.</h2>
+
+<form action="{% url 'register' %}" method="POST"> {% csrf_token %}
+
+        <table>
+            {{ formulario.as_table }}
+        </table>
+        <button type="submit">Registrarse</button>
+    </form>
+
+<h2>{{ mensaje }}</h2>
+
+{% endblock %}

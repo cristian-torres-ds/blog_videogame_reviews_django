@@ -1,0 +1,24 @@
+{% extends "app_super/padre.html" %}
+
+{% load static %}
+
+{% block titulo %}
+
+Editar perfil
+
+{% endblock %}
+
+{% block primero %}
+
+<h2>Editar Perfil {{ usuario }}.</h2>
+
+<h4>{{ mensaje }}</h4>
+ 
+<form action="{% url 'editar_perfil' %}" method="POST"> {% csrf_token %}
+        <table>
+            {{ mi_formulario.as_table }}
+        </table>
+        <input type="submit" value="Guardar">
+    </form>
+
+{% endblock %}
