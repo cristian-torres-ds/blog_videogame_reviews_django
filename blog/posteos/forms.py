@@ -3,9 +3,6 @@ from django import forms
 
 
 class PosteoForm(forms.Form):
-    nombre = forms.CharField(max_length=50)
-    apellido = forms.CharField(max_length=50)
-    telefono = forms.IntegerField()
-    email = forms.EmailField()
-    nacimiento = forms.DateField()
-    documento = forms.IntegerField()
+    titulo = forms.CharField(max_length=100)
+    subtitulo = forms.CharField(max_length=100)
+    cuerpo = forms.CharField(max_length=1000)

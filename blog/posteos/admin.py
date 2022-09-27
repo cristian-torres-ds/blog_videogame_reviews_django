@@ -1,3 +1,5 @@
 from django.contrib import admin
+from posteos.models import Posteo
 
-# Register your models here.
+
+admin.site.register(Posteo)
