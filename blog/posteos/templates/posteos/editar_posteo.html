@@ -3,19 +3,19 @@
 
 
 {% block titulo %}
-Añadir Avatar
+Editar Review
 {% endblock %}
 
 
 {% block primero %}
 
-<h2>Añadir Avatar.</h2>
-
-<form action="{% url 'add_avatar' %}" method="POST" enctype="multipart/form-data"> {% csrf_token %}
+<h2>Editar Review {{ posteo }}.</h2>
+ 
+<form action="{% url 'editar_posteo' posteo.id %}" method="POST"> {% csrf_token %}
         <table>
             {{ mi_formulario.as_table }}
         </table>
-        <button type="submit">Guardar</button>
+        <input type="submit" value="Enviar">
     </form>
 
 {% endblock %}

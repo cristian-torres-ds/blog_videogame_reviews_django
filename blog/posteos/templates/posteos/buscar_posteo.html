@@ -1,23 +1,38 @@
-{% extends "app_super/padre.html" %}
-
+{% extends "usuarios/padre.html" %}
 {% load static %}
-    
+
+{% block titulo %}
+Resultados de búsqueda
+{% endblock %}
+
+
 {% block primero %}
     
-{% if nombres %}
+{% if titulos %}
     <ul>
-        {% for nom in nombres %}
-            <p>
-                <br>Nombre: <b>{{nom.nombre}}</b>
-                <br>Apellido: <b>{{nom.apellido}}</b>
-                <br>Teléfono: <b>{{nom.telefono}}</b>
-                <br>E-mail: <b>{{nom.email}}</b>
-            </p>
+        {% for ti in titulos %}
+
+        <article>
+            <!-- Post header-->
+            <header class="mb-4">
+                <!-- Post title-->
+                <h1 class="fw-bolder mb-1"><br><b>{{ti.titulo}}</b></h1>
+                <h3 class="fw-bolder mb-1"><br><b>{{ti.subtitulo}}</b></h3>
+                <!-- Post meta content-->
+                <div class="text-muted fst-italic mb-2">Creado por:
+                    <a class="badge bg-secondary text-decoration-none link-light" href="#!">{{ti.user}}</a> en la fecha {{ti.creado}}
+                </div>
+            </header>
+            <section class="mb-5">
+                {{ti.contenido}}
+            </section>
+            <a href="{% url 'posteo_detallado' ti.id %}" class="btn btn-primary">Ver más &rarr;</a>
+        </article>
+
         {% endfor %}
     </ul>
 {% else %}
-<p>No se encontraron clientes.</p>
-
+<p>No se encontraron Reviews de ese juego.</p>
 {% endif %}
-     
+
 {% endblock %}

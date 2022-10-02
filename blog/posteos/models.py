@@ -1,10 +1,19 @@
 from django.db import models
+from django.contrib.auth.models import User
+
 
 class Posteo(models.Model):
-    titulo = models.CharField(max_length=100)
-    subtitulo = models.CharField(max_length=100)
-    cuerpo = models.CharField(max_length=1000)
-    fecha = models.DateField()
+    titulo = models.CharField(max_length=200, unique=True)
+    subtitulo = models.CharField(max_length=200, unique=True)
+    user = models.ForeignKey(User, on_delete= models.CASCADE)
+    puntaje = models.IntegerField()
+    actualizado = models.DateTimeField()
+    contenido = models.TextField()
+    creado = models.DateTimeField()
+
+
+    class Meta:
+        ordering = ['creado']
 
     def __str__(self):
-        return f"Autor: {self.autor}, Titulo: {self.receptor}"
+        return self.titulo

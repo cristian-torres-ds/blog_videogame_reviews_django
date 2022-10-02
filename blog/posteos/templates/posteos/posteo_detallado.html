@@ -1,0 +1,36 @@
+{% extends "usuarios/padre.html" %} 
+{% load static %}
+
+{% block titulo %}
+{{posteo.titulo}} - Review
+{% endblock %}
+
+
+{% block primero %}
+
+<article>
+    <!-- Post header-->
+    <header class="mb-4">
+        <!-- Post title-->
+        <h1 class="fw-bolder mb-1"><br><b>{{posteo.titulo}}</b><a class="btn btn-success"><b><h1>{{posteo.puntaje}}</b></h1></a></h1>
+        <h3 class="fw-bolder mb-1"><br>{{posteo.subtitulo}}</h3>
+        <!-- Post meta content-->
+        <div class="text-muted fst-italic mb-2">Creado por:
+            <a class="badge bg-secondary text-decoration-none link-light" href="#!">{{posteo.user.username}}</a> en {{posteo.creado}}
+            {% if posteo.creado != posteo.actualizado %}
+            y editado en {{posteo.actualizado}}
+            {% endif %}
+        </div>
+    </header>
+    <section class="mb-5">
+        {{posteo.contenido}}
+    </section>
+    {% if user.is_authenticated %}
+    {% if posteo.user.username == request.user.username %}
+    <a class="btn btn-dark btn-sm" href="{% url 'editar_posteo' posteo.id %}">EDITAR</a>
+    <a class="btn btn-danger btn-sm" href="{% url 'eliminar_posteo' posteo.id %}">ELIMINAR</a>
+    {% endif %}
+    {% endif %}
+</article>
+
+{% endblock %}

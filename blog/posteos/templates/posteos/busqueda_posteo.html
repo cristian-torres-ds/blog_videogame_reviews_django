@@ -1,13 +1,17 @@
-{% extends "app_super/padre.html" %}
-
+{% extends "usuarios/padre.html" %}
 {% load static %}
+
+{% block titulo %}
+Buscar Review
+{% endblock %}
+
 
 {% block primero %}
 
-<h3 class="display-5 fw-bold">Buscar cliente.</h3>
-<form action="{% url 'buscar_cliente' %}" method="GET">
+<h3 class="display-5 fw-bold">Buscar review de juego</h3>
+<form action="{% url 'buscar_posteo' %}" method="GET">
 
-    <input type="text" name="nombre" id="nombre">
+    <input type="text" name="titulo" id="titulo">
 
     <input type="submit" value="buscar">
 

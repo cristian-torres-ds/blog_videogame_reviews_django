@@ -1,10 +1,10 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+#from django.http import HttpResponse
 from django.shortcuts import render
-import datetime
+#import datetime
 from .models import *
 from .forms import *
-from django.urls import reverse_lazy
+#from django.urls import reverse_lazy
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
@@ -12,7 +12,12 @@ from django.contrib.auth.decorators import login_required
 
 def inicio(request):
 
-    return render(request, "usuarios/padre.html") # , {'avatar':obtener_avatar(request)}
+    return render(request, "usuarios/inicio.html", {'avatar':obtener_avatar(request)})
+
+
+def acerca_de(request):
+
+    return render(request, "usuarios/acerca_de.html", {'avatar':obtener_avatar(request)})
 
 
 def login_request(request):
@@ -27,28 +32,27 @@ def login_request(request):
 
             if user is not None:
                 login(request, user)
-                return render(request, "inicio.html", {'mensaje':f"Bienbenido {usuario}", 'avatar':obtener_avatar(request)})
+                return render(request, "usuarios/inicio.html", {'mensaje':f"Bienbenido {usuario}", 'avatar':obtener_avatar(request)})
             else:
-                return render(request, "login.html", {"formulario":form, "mensaje":"Usuario o contraseña incorrectos", 'avatar':obtener_avatar(request)})
+                return render(request, "usuarios/login.html", {"formulario":form, "mensaje":"Usuario o contraseña incorrectos", 'avatar':obtener_avatar(request)})
         else:
-            return render(request, "login.html", {"formulario":form, "mensaje":"Usuario o contraseña incorrectos", 'avatar':obtener_avatar(request)})
+            return render(request, "usuarios/login.html", {"formulario":form, "mensaje":"Usuario o contraseña incorrectos", 'avatar':obtener_avatar(request)})
     else:
         form=AuthenticationForm()
-        return render(request, "login.html", {'formulario':form, 'avatar':obtener_avatar(request)})
+        return render(request, "usuarios/login.html", {'formulario':form, 'avatar':obtener_avatar(request)})
 
 
-@login_required
 def register(request):
     if request.method == 'POST':
         form = UserRegisterForm(request.POST)
         if form.is_valid():
             username = form.cleaned_data['username']
             form.save()
-            return render(request, "inicio.html", {'mensaje':f"Usuario {username} creado correctamente.", 'avatar':obtener_avatar(request)})
+            return render(request, "usuarios/inicio.html", {'mensaje':f"Usuario {username} creado correctamente.", 'avatar':obtener_avatar(request)})
     else:
         form = UserRegisterForm()
     
-    return render(request, "register.html", {'formulario':form, 'avatar':obtener_avatar(request)})
+    return render(request, "usuarios/register.html", {'formulario':form, 'avatar':obtener_avatar(request)})
 
 
 @login_required
@@ -64,12 +68,12 @@ def editar_perfil(request):
             usuario.password2 = informacion['password2']
             usuario.save()
 
-            return render(request, "inicio.html", {'avatar':obtener_avatar(request)})
+            return render(request, "usuarios/inicio.html", {'avatar':obtener_avatar(request)})
     
     else:
         form = UserEditForm(initial={'email':usuario.email})
 
-    return render(request, "editar_perfil.html", {'mi_formulario':form, 'usuario':usuario, 'avatar':obtener_avatar(request)})
+    return render(request, "usuarios/editar_perfil.html", {'mi_formulario':form, 'usuario':usuario, 'avatar':obtener_avatar(request)})
 
 
 @login_required
@@ -84,12 +88,12 @@ def add_avatar(request):
             # Añadir avatar nuevo
             avatar = Avatar(user=request.user, imagen=formulario.cleaned_data['imagen'])
             avatar.save()
-            return render(request, 'app_super/inicio.html', {'usuario':request.user, 'mensaje':'Avatar guardado', 'imagen':avatar.imagen.url, 'avatar':obtener_avatar(request)})
+            return render(request, 'usuarios/inicio.html', {'usuario':request.user, 'mensaje':'Avatar guardado', 'imagen':avatar.imagen.url, 'avatar':obtener_avatar(request)})
         else:
-            return render(request, 'app_super/add_avatar.html', {'usuario':request.user, 'mensaje':'Formulario inválido', 'avatar':obtener_avatar(request)})
+            return render(request, 'usuarios/add_avatar.html', {'usuario':request.user, 'mensaje':'Formulario inválido', 'avatar':obtener_avatar(request)})
     else:
         formulario = AvatarForm()
-        return render(request, "app_super/add_avatar.html", {'mi_formulario':formulario, 'usuario':request.user, 'avatar':obtener_avatar(request)})
+        return render(request, "usuarios/add_avatar.html", {'mi_formulario':formulario, 'usuario':request.user, 'avatar':obtener_avatar(request)})
 
 
 def obtener_avatar(request):
