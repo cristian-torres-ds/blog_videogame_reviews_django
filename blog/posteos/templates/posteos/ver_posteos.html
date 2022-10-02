@@ -18,13 +18,13 @@ Reviews
         <!-- Post header-->
         <header class="mb-4">
             <!-- Post title-->
-            <h1 class="fw-bolder mb-1"><br><b>{{posteo.titulo}}</b><a class="btn btn-success"><b><h1> {{posteo.puntaje}}</b></h1></a></h1>
-            <h3 class="fw-bolder mb-1"><br>{{posteo.subtitulo}}</h3>
+            <h1 class="fw-bolder mb-1"><br><b>{{posteo.titulo}}&nbsp&nbsp&nbsp</b><a class="btn btn-success"><h6>PUNTAJE</h6><b><h2> {{posteo.puntaje}}</b></h2></a></h1>
+            <h3 class="fw-bolder mb-1">{{posteo.subtitulo}}</h3>
             <!-- Post meta content-->
             <div class="text-muted fst-italic mb-2">Creado por:
-                <a class="badge bg-secondary text-decoration-none link-light" href="#!">{{posteo.user.username}}</a> en {{posteo.creado}}
+                <a class="badge bg-secondary text-decoration-none link-light" href="#!">{{posteo.user.username}}</a> el {{posteo.creado.day}}/{{posteo.creado.month}}/{{posteo.creado.year}}
                 {% if posteo.creado != posteo.actualizado %}
-                y editado en {{posteo.actualizado}}
+                y editado el {{posteo.actualizado.day}}/{{posteo.actualizado.month}}/{{posteo.actualizado.year}}
                 {% endif %}
             </div>
         </header>
