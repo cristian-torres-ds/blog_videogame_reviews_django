@@ -1,5 +1,6 @@
-{% extends "usuarios/padre.html" %}
+{% extends "usuarios/padre_2.html" %}
 {% load static %}
+
 
 {% block titulo %}
 Nueva Review
@@ -8,13 +9,15 @@ Nueva Review
 
 {% block primero %}
 
-<h2>Nueva Review.</h2>
+<h2>Nueva Review:</h2>
+<br>
 
-<form action="{% url 'nuevo_posteo' %}" method="POST"> {% csrf_token %}
-        <table>
-            {{ mi_formulario.as_table }}
-        </table>
-        <input type="submit" value="Enviar">
-    </form>
+<form action="{% url 'nuevo_posteo' %}" method="POST" enctype="multipart/form-data"> {% csrf_token %}
+    <table>
+        {{ mi_formulario.media}}
+        {{ mi_formulario }}
+    </table>
+    <input type="submit" value="Enviar">
+</form>
 
 {% endblock %}

@@ -58,39 +58,6 @@
                     {% endblock %}
 
                 </div>
-                <!-- Side widgets-->
-                <div class="col-lg-4">
-                    <!-- Search widget-->
-                    <div class="card mb-4">
-                        <div class="card-header">Reviews</div>
-                        <div class="card-body">
-                            <div class="input-group">
-                                <form action="{% url 'buscar_posteo' %}" method="GET">
-                                    <input type="text" name="titulo" id="titulo">
-                                    <input type="submit" value="Buscar">
-                                </form>
-                                <li><a href="{% url 'ver_posteos' %}">Todas las Reviews</a></li>
-                                <li><a href="{% url 'nuevo_posteo' %}">Publica tu propia Review</a></li>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Categories widget-->
-                    <div class="card mb-4">
-                        <div class="card-header">Nuestro Equipo</div>
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <ul class="list-unstyled mb-0">
-                                        <!-- Incluir Usuarios para enviar mensages-->
-                                        {% for usuario in usuarios %}
-                                        <li><a href="{% url 'usuario_detallado' usuario.id %}">{{usuario.get_full_name}}</a></li>
-                                        {% endfor %}
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
         <!-- Footer-->

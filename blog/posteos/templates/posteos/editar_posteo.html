@@ -1,4 +1,4 @@
-{% extends "usuarios/padre.html" %}
+{% extends "usuarios/padre_2.html" %}
 {% load static %}
 
 
@@ -9,13 +9,15 @@ Editar Review
 
 {% block primero %}
 
-<h2>Editar Review {{ posteo }}.</h2>
+<h2>Editar Review:</h2>
+
  
-<form action="{% url 'editar_posteo' posteo.id %}" method="POST"> {% csrf_token %}
-        <table>
-            {{ mi_formulario.as_table }}
-        </table>
-        <input type="submit" value="Enviar">
-    </form>
+<form action="{% url 'editar_posteo' posteo.id %}" method="POST" enctype="multipart/form-data"> {% csrf_token %}
+    <table>
+        {{ mi_formulario.media}}
+        {{ mi_formulario }}
+    </table>
+    <input type="submit" value="Enviar">
+</form>
 
 {% endblock %}

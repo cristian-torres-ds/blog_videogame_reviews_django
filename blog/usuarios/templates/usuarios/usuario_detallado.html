@@ -1,8 +1,8 @@
-{% extends "usuarios/padre.html" %}
+{% extends "usuarios/padre.html" %} 
 {% load static %}
 
 {% block titulo %}
-GameRank - Inicio
+{{posteo.titulo}} - GameRank
 {% endblock %}
 
 
@@ -12,32 +12,31 @@ GameRank - Inicio
     <!-- Post header-->
     <header class="mb-4">
         <!-- Post title-->
-        <h1 class="fw-bolder mb-1">Bienvenido a GameRank!!!</h1>
-        <h3 class="fw-bolder mb-1">Donde encontrarás las reviews de tus juegos favoritos!</h3>
-        <h4 class="fw-bolder mb-1">Suscríbete y postea tus propias reviews!</h4>
+        <h1 class="fw-bolder mb-1"><br><b>{{usuario.get_full_name}}&nbsp&nbsp&nbsp</b><img height="70px" src="{{ foto }}" alt=""></h1>
+        <h3 class="fw-bolder mb-1">{{usuario.email}}</h3>
         <!-- Post meta content-->
-        <div class="text-muted fst-italic mb-2">Creado por Cristian Gabriel Torres y José Gabriel Torres.</div>
-        <!-- Post categories-->
+        <div class="text-muted fst-italic mb-2">Es miembro de GameRank desde: {{usuario.date_joined.day}}/{{usuario.date_joined.month}}/{{usuario.date_joined.year}}</div>
     </header>
 </article>
 
+<br>
+<br>
+<h1 class="fw-bolder mb-1"><br>Reviews subidas por <b></b>{{usuario.first_name}}:</b></h1>
+<br>
 
-<h2><br>{{ mensaje }}</h2>
+{% if posteos %}
 
-
-{% if lista_posteos %}
-
-    {% for posteo in lista_posteos %}
+    {% for posteo in posteos %}
 
     <article>
         <!-- Post header-->
         <header class="mb-4">
             <!-- Post title-->
-            <h1 class="fw-bolder mb-1"><br><b>{{posteo.titulo}}&nbsp&nbsp&nbsp</b><a class="btn btn-success"><h6>PUNTAJE</h6><b><h1> {{posteo.puntaje}}</b></h1></a></h1>
+            <h2 class="fw-bolder mb-1"><br><b>{{posteo.titulo}}&nbsp&nbsp&nbsp</b><a class="btn btn-success"><h6>PUNTAJE</h6><b><h2> {{posteo.puntaje}}</b></h2></a></h2>
             <h3 class="fw-bolder mb-1">{{posteo.subtitulo}}</h3>
             <!-- Post meta content-->
             <div class="text-muted fst-italic mb-2">Creado por:
-                <a class="badge bg-secondary text-decoration-none link-light" href="#!">{{posteo.user.get_full_name}}</a> el {{posteo.creado.day}}/{{posteo.creado.month}}/{{posteo.creado.year}}
+                <a class="badge bg-secondary text-decoration-none link-light" href="{% url 'usuario_detallado' usuario.id %}">{{posteo.user.get_full_name}}</a> el {{posteo.creado.day}}/{{posteo.creado.month}}/{{posteo.creado.year}}
                 {% if posteo.creado != posteo.actualizado %}
                 y editado el {{posteo.actualizado.day}}/{{posteo.actualizado.month}}/{{posteo.actualizado.year}}
                 {% endif %}
@@ -55,7 +54,7 @@ GameRank - Inicio
 
 {% else %}
 
-<p>Todavía no se han subido reviews.</p>
+<p>{{usuario.first_name}}Todavía no se han subido reviews.</p>
 
 {% endif %}
 

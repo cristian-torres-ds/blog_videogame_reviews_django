@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from ckeditor_uploader.fields import RichTextUploadingField
 
 
 class Posteo(models.Model):
@@ -8,12 +9,13 @@ class Posteo(models.Model):
     user = models.ForeignKey(User, on_delete= models.CASCADE)
     puntaje = models.IntegerField()
     actualizado = models.DateTimeField()
-    contenido = models.TextField()
+    contenido = RichTextUploadingField()
     creado = models.DateTimeField()
+    imagen = models.ImageField(upload_to='imagenes')
 
 
     class Meta:
-        ordering = ['creado']
+        ordering = ['-creado']
 
     def __str__(self):
         return self.titulo

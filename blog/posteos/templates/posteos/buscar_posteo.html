@@ -16,17 +16,22 @@ Resultados de búsqueda
             <!-- Post header-->
             <header class="mb-4">
                 <!-- Post title-->
-                <h1 class="fw-bolder mb-1"><br><b>{{ti.titulo}}</b></h1>
-                <h3 class="fw-bolder mb-1"><br><b>{{ti.subtitulo}}</b></h3>
+                <h1 class="fw-bolder mb-1"><br><b>{{ti.titulo}}&nbsp&nbsp&nbsp</b><a class="btn btn-success"><h6>PUNTAJE</h6><b><h1> {{ti.puntaje}}</b></h1></a></h1>
+                <h3 class="fw-bolder mb-1">{{ti.subtitulo}}</h3>
                 <!-- Post meta content-->
                 <div class="text-muted fst-italic mb-2">Creado por:
-                    <a class="badge bg-secondary text-decoration-none link-light" href="#!">{{ti.user}}</a> en la fecha {{ti.creado}}
+                    <a class="badge bg-secondary text-decoration-none link-light" href="#!">{{ti.user.get_full_name}}</a> el {{ti.creado.day}}/{{ti.creado.month}}/{{ti.creado.year}}
+                    {% if ti.creado != ti.actualizado %}
+                    y editado el {{ti.actualizado.day}}/{{ti.actualizado.month}}/{{ti.actualizado.year}}
+                    {% endif %}
                 </div>
+                <img height="200px" src="{{ ti.imagen.url }}" alt="">
             </header>
             <section class="mb-5">
-                {{ti.contenido}}
+                {{ti.contenido|slice:":200"|safe}}...
+                <br>
+                <a href="{% url 'posteo_detallado' ti.id %}" class="btn btn-primary">Ver más &rarr;</a>
             </section>
-            <a href="{% url 'posteo_detallado' ti.id %}" class="btn btn-primary">Ver más &rarr;</a>
         </article>
 
         {% endfor %}

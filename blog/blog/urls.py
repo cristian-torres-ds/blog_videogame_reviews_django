@@ -12,6 +12,7 @@ urlpatterns = [
     path('posteos/', include('posteos.urls')),
     path('mensajes/', include('mensajes.urls')),
     path('usuarios/', include('usuarios.urls')),
+    path('ckeditor/', include('ckeditor_uploader.urls')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
