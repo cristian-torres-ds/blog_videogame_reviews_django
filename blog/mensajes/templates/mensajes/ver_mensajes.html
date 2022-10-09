@@ -12,6 +12,8 @@ Mensajes - GameRank
 
 <section style="background-color: #eee;">
     <div class="container py-5">
+        <h4>Chat con: {{receptor.get_full_name}}</h4>
+        <br>
         {% if lista_mensajes %}
         {% for mensaje in lista_mensajes %}
         {% if user.id == mensaje.emisor_id %}
@@ -31,7 +33,7 @@ Mensajes - GameRank
         <div class="d-flex flex-row justify-content-end mb-4">
             <div class="p-3 me-3 border" style="border-radius: 15px; background-color: #fbfbfb;">
                 <p class="small mb-0">
-                    Tu, {{mensaje.creado}}
+                    {{receptor.get_full_name}}, {{mensaje.creado}}
                 </p>
                 <p><h6>
                     {{mensaje.contenido}}

@@ -46,7 +46,8 @@ def login_request(request):
                 return render(request, "usuarios/inicio.html", {'mensaje':f"Bienvenido {usuario}!!!",
                                                                 'avatar':obtener_avatar(request),
                                                                 'usuarios':obtener_usuarios(),
-                                                                'lista_posteos':lista_posteos})
+                                                                'lista_posteos':lista_posteos,
+                                                                'receptores':obtener_receptores(request)})
             else:
                 return render(request, "usuarios/login.html", {'formulario':form,
                                                                'mensaje':'Usuario o contraseña incorrectos',

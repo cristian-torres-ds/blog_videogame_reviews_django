@@ -79,11 +79,17 @@ def posteo_detallado(request, id):
 def eliminar_posteo(request, id):
     posteo = Posteo.objects.get(id=id)
     posteo.delete()
+    
+    lista_posteos = Posteo.objects.all().order_by('-creado')
 
+    if len(lista_posteos) > 3:
+        lista_posteos = lista_posteos[0:3]
+        
     return render(request, "usuarios/inicio.html", {'mensaje':f'Review eliminado',
                                                     'avatar':obtener_avatar(request),
                                                     'usuarios':obtener_usuarios(),
-                                                    'receptores':obtener_receptores(request)})
+                                                    'receptores':obtener_receptores(request),
+                                                    'lista_posteos':lista_posteos})
 
 
 
