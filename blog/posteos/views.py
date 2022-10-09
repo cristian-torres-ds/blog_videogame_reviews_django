@@ -23,10 +23,14 @@ def nuevo_posteo(request):
                             imagen = informacion['imagen'],)
 
             posteo.save()
-            return render(request, "usuarios/inicio.html", {'autor':request.user,
-                                                            'mensaje':'Review subida exitosamente.',
-                                                            'avatar':obtener_avatar(request),
-                                                            'usuarios':obtener_usuarios(request)})
+            return render(request, "posteos/posteo_detallado.html", {'posteo':posteo,
+                                                                     'mensaje':'Review subida exitosamente!!!',
+                                                                     'avatar':obtener_avatar(request),
+                                                                     'usuarios':obtener_usuarios()})
+                                                                  #   {'autor':request.user,
+                                                                  #   'mensaje':'Review subida exitosamente.',                                                           ,
+                                                            #'avatar':obtener_avatar(request),
+                                                            #'usuarios':obtener_usuarios()})
     else:
         mi_formulario = PosteoForm()
     return render(request, "posteos/nuevo_posteo.html", {'autor':request.user,
@@ -37,7 +41,7 @@ def nuevo_posteo(request):
 def busqueda_posteo(request):
 
     return render(request, "posteos/busqueda_posteo.html", {'avatar':obtener_avatar(request),
-                                                            'usuarios':obtener_usuarios(request)})
+                                                            'usuarios':obtener_usuarios()})
 
 
 def buscar_posteo(request):
@@ -46,11 +50,11 @@ def buscar_posteo(request):
         titulos = Posteo.objects.filter(titulo__icontains=titulo)
         return render(request, "posteos/buscar_posteo.html", {'titulos':titulos,
                                                               'avatar':obtener_avatar(request),
-                                                              'usuarios':obtener_usuarios(request)})
+                                                              'usuarios':obtener_usuarios()})
     else:
         return render(request, "posteos/busqueda_posteo.html", {'mensaje':'Ingrese un título.',
                                                                 'avatar':obtener_avatar(request),
-                                                                'usuarios':obtener_usuarios(request)})
+                                                                'usuarios':obtener_usuarios()})
 
 
 def ver_posteos(request):
@@ -58,7 +62,7 @@ def ver_posteos(request):
 
     return render(request, "posteos/ver_posteos.html", {'lista_posteos':lista_posteos,
                                                         'avatar':obtener_avatar(request),
-                                                        'usuarios':obtener_usuarios(request)})
+                                                        'usuarios':obtener_usuarios()})
 
 
 def posteo_detallado(request, id):
@@ -66,7 +70,7 @@ def posteo_detallado(request, id):
 
     return render(request, "posteos/posteo_detallado.html", {'posteo':posteo,
                                                              'avatar':obtener_avatar(request),
-                                                             'usuarios':obtener_usuarios(request)})
+                                                             'usuarios':obtener_usuarios()})
 
 
 @login_required
@@ -76,7 +80,7 @@ def eliminar_posteo(request, id):
 
     return render(request, "usuarios/inicio.html", {'mensaje':f'Review eliminado',
                                                     'avatar':obtener_avatar(request),
-                                                    'usuarios':obtener_usuarios(request)})
+                                                    'usuarios':obtener_usuarios()})
 
 
 
@@ -100,7 +104,7 @@ def editar_posteo(request, id):
             return render(request, "usuarios/inicio.html", {'autor':request.user,
                                                             'mensaje':'Review editada exitosamente.',
                                                             'avatar':obtener_avatar(request),
-                                                            'usuarios':obtener_usuarios(request)})
+                                                            'usuarios':obtener_usuarios()})
     
     else:
         mi_formulario = PosteoForm(initial={'titulo':posteo.titulo,
@@ -111,3 +115,9 @@ def editar_posteo(request, id):
     return render(request, "posteos/editar_posteo.html", {'mi_formulario':mi_formulario,
                                                           'posteo':posteo,
                                                           'avatar':obtener_avatar(request)})
+
+
+def review_criteria(request):
+
+    return render(request, "posteos/review_criteria.html", {'avatar':obtener_avatar(request),
+                                                            'usuarios':obtener_usuarios()})

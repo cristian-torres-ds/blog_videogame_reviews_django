@@ -1,11 +1,11 @@
 from django import forms
-
+from django.contrib.auth.models import User
 
 
 class MensajeForm(forms.Form):
-    nombre = forms.CharField(max_length=50)
-    apellido = forms.CharField(max_length=50)
-    telefono = forms.IntegerField()
-    email = forms.EmailField()
-    nacimiento = forms.DateField()
-    documento = forms.IntegerField()
+    contenido = forms.CharField(max_length=1000, widget=forms.Textarea)
+    receptor = forms.ModelChoiceField(queryset=User.objects.all())
+
+
+class ResponderForm(forms.Form):
+    contenido = forms.CharField(max_length=1000, widget=forms.Textarea)

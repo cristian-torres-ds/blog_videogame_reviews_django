@@ -1,5 +1,4 @@
 from django import forms
-from posteos.models import Posteo
 from ckeditor_uploader.fields import RichTextUploadingFormField
 
 

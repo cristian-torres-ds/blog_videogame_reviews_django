@@ -1,0 +1,53 @@
+{% extends "usuarios/padre.html" %} 
+{% load static %}
+
+{% block titulo %}
+Review criteria - GameRank
+{% endblock %}
+
+
+{% block primero %}
+
+<article>
+    <!-- Post header-->
+    <header class="mb-4">
+        <!-- Post title-->
+        <h2 class="fw-bolder mb-1">Criteria de puntuacíon GameRank &nbsp&nbsp&nbsp</h2>
+    </header>
+    <section class="mb-5">
+        <p>
+            Desde <b>GameRank</b> no vemos los videojuegos como un simple entretenimiento, 
+            al igual que comprendemos que no todas las personas entenderán de la misma manera una obra. 
+            Por esto, y antes de pasar a ver los puntos que se tienen en cuenta a la hora de valorar un videojuego, 
+            indicamos que en cualquier caso este criterio es del redactor, y su punto de vista debe ser respetado 
+            (y discutido en caso de discrepancia, pero con educación y sin faltar).
+        </p>
+        <p>
+            Una vez recalcada la subjetividad que defendemos en este medio, 
+            y recordando que un análisis no es más que una pieza literaria, 
+            pasamos a los puntos que tenemos en cuenta a la hora de valorar las obras 
+            que analizamos independientemente de que estos se traten más o menos en ciertas reviews.
+        </p>
+        <p>
+            <p><b>Historia:</b> trama, desarrollo de la narrativa, desarrollo, construcción y presentación de personajes, coherencia ludonarrativa.</p>
+            <p><b>Jugabilidad:</b> variedad y calidad de las mecánicas implementadas, sensaciones a la hora de jugar, aportaciones al género.</p>
+            <p><b>Apartado técnico.</b></p>
+            <p><b>Apartado artístico:</b> diseño del mapeado, arte del juego, coherencia del mismo con el mundo propuesto.</p>
+            <p><b>Apartado sonoro:</b> efectos especiales, banda sonora, doblaje.</p>
+            <p><b>Multijugador:</b> papel que desempeña en el juego, implicaciones narrativas y jugables.</p>
+            <p><b>Innovación.</b></p>
+            <p><b>Duración.</b></p>
+        </p>
+        <p>
+            Según estas criterias, el redactor otorgará al título analizado el puntaje considerado.
+        </p>
+        <p>
+            <form>
+                <input type="button" class="btn btn-success" value="VOLVER" onclick="history.back()">
+            </form>
+        </p>
+    </section>
+    
+</article>
+
+{% endblock %}

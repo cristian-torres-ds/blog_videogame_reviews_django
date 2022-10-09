@@ -12,10 +12,11 @@
     <!-- Post header-->
     <header class="mb-4">
         <!-- Post title-->
-        <h1 class="fw-bolder mb-1"><br><b>{{usuario.get_full_name}}&nbsp&nbsp&nbsp</b><img height="70px" src="{{ foto }}" alt=""></h1>
+        <h1 class="fw-bolder mb-1"><br><b>{{usuario.get_full_name}}&nbsp&nbsp&nbsp</b><img height="70px" src="{{ avatar }}" alt=""></h1>
         <h3 class="fw-bolder mb-1">{{usuario.email}}</h3>
         <!-- Post meta content-->
         <div class="text-muted fst-italic mb-2">Es miembro de GameRank desde: {{usuario.date_joined.day}}/{{usuario.date_joined.month}}/{{usuario.date_joined.year}}</div>
+        <a class="btn btn-dark btn-sm" href="{% url 'nuevo_mensaje' %}">Escribir Mensaje</a>
     </header>
 </article>
 
@@ -32,7 +33,7 @@
         <!-- Post header-->
         <header class="mb-4">
             <!-- Post title-->
-            <h2 class="fw-bolder mb-1"><br><b>{{posteo.titulo}}&nbsp&nbsp&nbsp</b><a class="btn btn-success"><h6>PUNTAJE</h6><b><h2> {{posteo.puntaje}}</b></h2></a></h2>
+            <h2 class="fw-bolder mb-1"><br><b>{{posteo.titulo}}&nbsp&nbsp&nbsp</b><a class="btn btn-success" href="{% url 'review_criteria' %}"><h6>PUNTAJE</h6><b><h2> {{posteo.puntaje}}</b></h2></a></h2>
             <h3 class="fw-bolder mb-1">{{posteo.subtitulo}}</h3>
             <!-- Post meta content-->
             <div class="text-muted fst-italic mb-2">Creado por:

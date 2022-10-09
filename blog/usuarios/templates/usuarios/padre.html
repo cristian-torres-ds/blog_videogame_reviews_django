@@ -74,17 +74,34 @@
                             </div>
                         </div>
                     </div>
-                    <!-- Categories widget-->
+                    <!-- Usuarios widget-->
                     <div class="card mb-4">
                         <div class="card-header">Nuestro Equipo</div>
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-sm-6">
                                     <ul class="list-unstyled mb-0">
-                                        <!-- Incluir Usuarios para enviar mensages-->
                                         {% for usuario in usuarios %}
                                         <li><a href="{% url 'usuario_detallado' usuario.id %}">{{usuario.get_full_name}}</a></li>
                                         {% endfor %}
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Mensajes widget-->
+                    <div class="card mb-4">
+                        <div class="card-header">Mensajes</div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <ul class="list-unstyled mb-0">
+                                        <li><a href="{% url 'nuevo_mensaje' %}">Nuevo mensaje</a></li>
+                                        {% if receptores %}
+                                        {% for receptor in receptores %}
+                                        <li><a href="{% url 'ver_mensajes' receptor.id %}">{{receptor.get_full_name}}</a></li>
+                                        {% endfor %}
+                                        {% endif %}
                                     </ul>
                                 </div>
                             </div>
