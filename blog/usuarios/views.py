@@ -24,7 +24,8 @@ def inicio(request):
 def acerca_de(request):
 
     return render(request, "usuarios/acerca_de.html", {'avatar':obtener_avatar(request),
-                                                       'usuarios':obtener_usuarios()})
+                                                       'usuarios':obtener_usuarios(),
+                                                       'receptores':obtener_receptores(request)})
 
 
 def login_request(request):
@@ -97,7 +98,9 @@ def editar_perfil(request):
             usuario.save()
 
             return render(request, "usuarios/inicio.html", {'avatar':obtener_avatar(request),
-                                                            'usuarios':obtener_usuarios()})
+                                                            'usuarios':obtener_usuarios(),
+                                                            'receptores':obtener_receptores(request),
+                                                            'mensaje':'Prefil editado correctamente.'})
     
     else:
         form = UserEditForm(initial={'email':usuario.email})
@@ -105,7 +108,8 @@ def editar_perfil(request):
     return render(request, "usuarios/editar_perfil.html", {'mi_formulario':form,
                                                            'usuario':usuario,
                                                            'avatar':obtener_avatar(request),
-                                                           'usuarios':obtener_usuarios()})
+                                                           'usuarios':obtener_usuarios(),
+                                                           'receptores':obtener_receptores(request)})
 
 
 @login_required
@@ -122,18 +126,21 @@ def add_avatar(request):
                                                             'mensaje':'Avatar guardado',
                                                             'imagen':avatar.imagen.url,
                                                             'avatar':obtener_avatar(request),
-                                                            'usuarios':obtener_usuarios()})
+                                                            'usuarios':obtener_usuarios(),
+                                                            'receptores':obtener_receptores(request)})
         else:
             return render(request, 'usuarios/add_avatar.html', {'usuario':request.user,
                                                                 'mensaje':'Formulario inválido',
                                                                 'avatar':obtener_avatar(request),
-                                                                'usuarios':obtener_usuarios()})
+                                                                'usuarios':obtener_usuarios(),
+                                                                'receptores':obtener_receptores(request)})
     else:
         formulario = AvatarForm()
         return render(request, "usuarios/add_avatar.html", {'mi_formulario':formulario,
                                                             'usuario':request.user,
                                                             'avatar':obtener_avatar(request),
-                                                            'usuarios':obtener_usuarios()})
+                                                            'usuarios':obtener_usuarios(),
+                                                            'receptores':obtener_receptores(request)})
 
 
 
@@ -142,6 +149,8 @@ def obtener_avatar(request):
         lista = Avatar.objects.filter(user=request.user)
         if len(lista)!=0:
             imagen = lista[0].imagen.url
+        else:
+            imagen = "/media/avatares/default.png"
     else:
         imagen = "/media/avatares/default.png"
     return imagen
@@ -158,22 +167,39 @@ def obtener_usuarios():
 def usuario_detallado(request, id):
     usuario = User.objects.get(id=id)
     posteos = Posteo.objects.filter(user_id=id)
+    foto_lista = Avatar.objects.filter(user_id=id)
+    if len(foto_lista)!=0:
+        foto = foto_lista[0].imagen.url
+    else:
+        foto = "/media/avatares/default.png"
 
     return render(request, "usuarios/usuario_detallado.html", {'usuario':usuario,
                                                                'avatar':obtener_avatar(request),
                                                                'usuarios':obtener_usuarios(),
-                                                               'posteos':posteos})
+                                                               'posteos':posteos,
+                                                               'foto':foto,
+                                                               'receptores':obtener_receptores(request)})
 
 
 # Se colocó aquí porque si se la coloca en mensajes.views trae el siquiente error:
 # ImportError: cannot import name 'obtener_avatar' from partially initialized module 'usuarios.views' (most likely due to a circular import)
 def obtener_receptores(request):
     if request.user.is_authenticated:
-        lista_chats = Mensaje.objects.filter(emisor_id=request.user.id).values_list('receptor_id', flat=True)
         lista_receptores_unique = []
+
+        lista_chats = Mensaje.objects.filter(emisor_id=request.user.id).values_list('receptor_id', flat=True)
         for receptor in lista_chats:
             if receptor not in lista_receptores_unique:
                 lista_receptores_unique.append(receptor)
+
+        lista_chats_2 = Mensaje.objects.filter(receptor_id=request.user.id).values_list('emisor_id', flat=True)
+        for emisor in lista_chats_2:
+            if emisor not in lista_receptores_unique:
+                lista_receptores_unique.append(emisor)
+
         receptores = User.objects.filter(id__in=lista_receptores_unique)
+    
+    else:
+        receptores = []
 
     return receptores

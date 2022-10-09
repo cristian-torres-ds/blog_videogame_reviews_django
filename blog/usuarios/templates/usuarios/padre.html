@@ -97,6 +97,7 @@
                                 <div class="col-sm-6">
                                     <ul class="list-unstyled mb-0">
                                         <li><a href="{% url 'nuevo_mensaje' %}">Nuevo mensaje</a></li>
+                                        <br>
                                         {% if receptores %}
                                         {% for receptor in receptores %}
                                         <li><a href="{% url 'ver_mensajes' receptor.id %}">{{receptor.get_full_name}}</a></li>

@@ -20,7 +20,7 @@ Resultados de búsqueda
                 <h3 class="fw-bolder mb-1">{{ti.subtitulo}}</h3>
                 <!-- Post meta content-->
                 <div class="text-muted fst-italic mb-2">Creado por:
-                    <a class="badge bg-secondary text-decoration-none link-light" href="{% url 'usuario_detallado' posteo.user_id %}">{{ti.user.get_full_name}}</a> el {{ti.creado.day}}/{{ti.creado.month}}/{{ti.creado.year}}
+                    <a class="badge bg-secondary text-decoration-none link-light" href="{% url 'usuario_detallado' ti.user_id %}">{{ti.user.get_full_name}}</a> el {{ti.creado.day}}/{{ti.creado.month}}/{{ti.creado.year}}
                     {% if ti.creado != ti.actualizado %}
                     y editado el {{ti.actualizado.day}}/{{ti.actualizado.month}}/{{ti.actualizado.year}}
                     {% endif %}

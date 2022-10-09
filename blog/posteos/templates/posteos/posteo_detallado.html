@@ -35,6 +35,11 @@
         <a class="btn btn-danger btn-sm" href="{% url 'eliminar_posteo' posteo.id %}">ELIMINAR</a>
         {% endif %}
         {% endif %}
+        <p>
+            <form>
+                <input type="button" class="btn btn-success" value="VOLVER" onclick="history.back()">
+            </form>
+        </p>
     </section>
 </article>
 
