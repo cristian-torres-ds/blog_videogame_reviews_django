@@ -204,3 +204,13 @@ def obtener_receptores(request):
         receptores = []
 
     return receptores
+
+
+
+def acerca_de(request):
+    foto = "/media/torres_team.jpg"
+
+    return render(request, "usuarios/acerca_de.html", {'avatar':obtener_avatar(request),
+                                                       'usuarios':obtener_usuarios(),
+                                                       'foto':foto,
+                                                       'receptores':obtener_receptores(request)})
