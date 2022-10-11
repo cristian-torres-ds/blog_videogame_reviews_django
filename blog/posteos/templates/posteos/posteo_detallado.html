@@ -18,7 +18,7 @@
         <h1 class="fw-bolder mb-1"><br><b>{{posteo.titulo}}&nbsp&nbsp&nbsp</b>
             {% if posteo.puntaje > 79 %}
             <a class="btn btn-success" href="{% url 'review_criteria' %}"><h6>PUNTAJE</h6><b><h1> {{posteo.puntaje}}</b></h1></a>
-            {% elif posteo.puntaje <= 79 and posteo.puntaje >= 50 %}
+            {% elif posteo.puntaje <= 79 and posteo.puntaje >= 60 %}
             <a class="btn btn-warning" href="{% url 'review_criteria' %}"><h6>PUNTAJE</h6><b><h1> {{posteo.puntaje}}</b></h1></a>
             {% else %}
             <a class="btn btn-danger" href="{% url 'review_criteria' %}"><h6>PUNTAJE</h6><b><h1> {{posteo.puntaje}}</b></h1></a>
@@ -41,13 +41,10 @@
         {% if posteo.user.username == request.user.username %}
         <a class="btn btn-dark btn-sm" href="{% url 'editar_posteo' posteo.id %}">EDITAR</a>
         <a class="btn btn-danger btn-sm" href="{% url 'eliminar_posteo' posteo.id %}">ELIMINAR</a>
+        <br>
         {% endif %}
         {% endif %}
-        <p>
-            <form>
-                <input type="button" class="btn btn-success" value="VOLVER" onclick="history.back()">
-            </form>
-        </p>
+
     </section>
 </article>
 

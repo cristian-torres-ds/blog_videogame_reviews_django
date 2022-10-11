@@ -19,7 +19,7 @@ Resultados de búsqueda
                 <h1 class="fw-bolder mb-1"><br><b>{{ti.titulo}}&nbsp&nbsp&nbsp</b>
                     {% if ti.puntaje > 79 %}
                     <a class="btn btn-success" href="{% url 'review_criteria' %}"><h6>PUNTAJE</h6><b><h1> {{ti.puntaje}}</b></h1></a>
-                    {% elif ti.puntaje <= 79 and ti.puntaje >= 50 %}
+                    {% elif ti.puntaje <= 79 and ti.puntaje >= 60 %}
                     <a class="btn btn-warning" href="{% url 'review_criteria' %}"><h6>PUNTAJE</h6><b><h1> {{ti.puntaje}}</b></h1></a>
                     {% else %}
                     <a class="btn btn-danger" href="{% url 'review_criteria' %}"><h6>PUNTAJE</h6><b><h1> {{ti.puntaje}}</b></h1></a>

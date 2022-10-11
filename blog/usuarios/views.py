@@ -1,5 +1,4 @@
 from django.shortcuts import render
-from django.shortcuts import render
 from usuarios.models import Avatar
 from usuarios.forms import *
 from django.contrib.auth.forms import AuthenticationForm
@@ -10,12 +9,8 @@ from mensajes.models import Mensaje
 
 
 def inicio(request):
-    lista_posteos = Posteo.objects.all().order_by('-creado')
 
-    if len(lista_posteos) > 3:
-        lista_posteos = lista_posteos[0:3]
-
-    return render(request, "usuarios/inicio.html", {'lista_posteos':lista_posteos,
+    return render(request, "usuarios/inicio.html", {'lista_posteos':obtener_posteos(),
                                                     'avatar':obtener_avatar(request),
                                                     'usuarios':obtener_usuarios(),
                                                     'receptores':obtener_receptores(request)})
@@ -40,13 +35,11 @@ def login_request(request):
 
             if user is not None:
                 login(request, user)
-                lista_posteos = Posteo.objects.all().order_by('-creado')
-                if len(lista_posteos) > 3:
-                    lista_posteos = lista_posteos[0:3]
+
                 return render(request, "usuarios/inicio.html", {'mensaje':f"Bienvenido {usuario}!!!",
                                                                 'avatar':obtener_avatar(request),
                                                                 'usuarios':obtener_usuarios(),
-                                                                'lista_posteos':lista_posteos,
+                                                                'lista_posteos':obtener_posteos(),
                                                                 'receptores':obtener_receptores(request)})
             else:
                 return render(request, "usuarios/login.html", {'formulario':form,
@@ -71,9 +64,11 @@ def register(request):
         if form.is_valid():
             username = form.cleaned_data['username']
             form.save()
+
             return render(request, "usuarios/inicio.html", {'mensaje':f'Usuario {username} creado correctamente.',
                                                             'avatar':obtener_avatar(request),
-                                                            'usuarios':obtener_usuarios()})
+                                                            'usuarios':obtener_usuarios(),
+                                                            'lista_posteos':obtener_posteos()})
     else:
         form = UserRegisterForm()
     
@@ -93,7 +88,6 @@ def editar_perfil(request):
             usuario.email = informacion['email']
             usuario.first_name = informacion['first_name']
             usuario.last_name = informacion['last_name']
-            usuario.nacimiento = informacion['nacimiento']
             usuario.password1 = informacion['password1']
             usuario.password2 = informacion['password2']
             usuario.save()
@@ -101,10 +95,13 @@ def editar_perfil(request):
             return render(request, "usuarios/inicio.html", {'avatar':obtener_avatar(request),
                                                             'usuarios':obtener_usuarios(),
                                                             'receptores':obtener_receptores(request),
-                                                            'mensaje':'Prefil editado correctamente.'})
+                                                            'mensaje':'Prefil editado correctamente.',
+                                                            'lista_posteos':obtener_posteos()})
     
     else:
-        form = UserEditForm(initial={'email':usuario.email})
+        form = UserEditForm(initial={'email':usuario.email,
+                                     'first_name':usuario.first_name,
+                                     'last_name':usuario.last_name})
 
     return render(request, "usuarios/editar_perfil.html", {'mi_formulario':form,
                                                            'usuario':usuario,
@@ -123,11 +120,13 @@ def add_avatar(request):
                 avatar_viejo[0].delete()
             avatar = Avatar(user=request.user, imagen=formulario.cleaned_data['imagen'])
             avatar.save()
+
             return render(request, 'usuarios/inicio.html', {'usuario':request.user,
                                                             'mensaje':'Avatar guardado',
                                                             'imagen':avatar.imagen.url,
                                                             'avatar':obtener_avatar(request),
                                                             'usuarios':obtener_usuarios(),
+                                                            'lista_posteos':obtener_posteos(),
                                                             'receptores':obtener_receptores(request)})
         else:
             return render(request, 'usuarios/add_avatar.html', {'usuario':request.user,
@@ -214,3 +213,10 @@ def acerca_de(request):
                                                        'usuarios':obtener_usuarios(),
                                                        'foto':foto,
                                                        'receptores':obtener_receptores(request)})
+
+
+def obtener_posteos():
+    lista_posteos = Posteo.objects.all().order_by('-creado')
+    if len(lista_posteos) > 3:
+        lista_posteos = lista_posteos[0:3]
+    return lista_posteos

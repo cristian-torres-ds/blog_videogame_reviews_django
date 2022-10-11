@@ -21,7 +21,7 @@ Reviews - GameRank
             <h1 class="fw-bolder mb-1"><br><b>{{posteo.titulo}}&nbsp&nbsp&nbsp</b>
                 {% if posteo.puntaje > 79 %}
                 <a class="btn btn-success" href="{% url 'review_criteria' %}"><h6>PUNTAJE</h6><b><h1> {{posteo.puntaje}}</b></h1></a>
-                {% elif posteo.puntaje <= 79 and posteo.puntaje >= 50 %}
+                {% elif posteo.puntaje <= 79 and posteo.puntaje >= 60 %}
                 <a class="btn btn-warning" href="{% url 'review_criteria' %}"><h6>PUNTAJE</h6><b><h1> {{posteo.puntaje}}</b></h1></a>
                 {% else %}
                 <a class="btn btn-danger" href="{% url 'review_criteria' %}"><h6>PUNTAJE</h6><b><h1> {{posteo.puntaje}}</b></h1></a>

@@ -20,12 +20,14 @@
     </header>
 </article>
 
+
+
+{% if posteos %}
+
 <br>
 <br>
 <h1 class="fw-bolder mb-1"><br>Reviews subidas por <b></b>{{usuario.first_name}}:</b></h1>
 <br>
-
-{% if posteos %}
 
     {% for posteo in posteos %}
 
@@ -36,7 +38,7 @@
             <h2 class="fw-bolder mb-1"><br><b>{{posteo.titulo}}&nbsp&nbsp&nbsp</b>
                 {% if posteo.puntaje > 79 %}
                 <a class="btn btn-success" href="{% url 'review_criteria' %}"><h6>PUNTAJE</h6><b><h1> {{posteo.puntaje}}</b></h1></a>
-                {% elif posteo.puntaje <= 79 and posteo.puntaje >= 50 %}
+                {% elif posteo.puntaje <= 79 and posteo.puntaje >= 60 %}
                 <a class="btn btn-warning" href="{% url 'review_criteria' %}"><h6>PUNTAJE</h6><b><h1> {{posteo.puntaje}}</b></h1></a>
                 {% else %}
                 <a class="btn btn-danger" href="{% url 'review_criteria' %}"><h6>PUNTAJE</h6><b><h1> {{posteo.puntaje}}</b></h1></a>
@@ -63,7 +65,9 @@
 
 {% else %}
 
-<p>{{usuario.first_name}}Todavía no se han subido reviews.</p>
+<br>
+<br>
+<h3><p>{{usuario.first_name}} {{usuario.last_name}} todavía no ha subido reviews.</p></h3>
 
 {% endif %}
 

@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from posteos.forms import PosteoForm
 from posteos.models import Posteo
-from usuarios.views import obtener_avatar, obtener_receptores, obtener_usuarios
+from usuarios.views import obtener_avatar, obtener_receptores, obtener_usuarios, obtener_posteos
 from django.contrib.auth.decorators import login_required
 import datetime
 
@@ -79,17 +79,12 @@ def posteo_detallado(request, id):
 def eliminar_posteo(request, id):
     posteo = Posteo.objects.get(id=id)
     posteo.delete()
-    
-    lista_posteos = Posteo.objects.all().order_by('-creado')
 
-    if len(lista_posteos) > 3:
-        lista_posteos = lista_posteos[0:3]
-        
     return render(request, "usuarios/inicio.html", {'mensaje':f'Review eliminado',
                                                     'avatar':obtener_avatar(request),
                                                     'usuarios':obtener_usuarios(),
                                                     'receptores':obtener_receptores(request),
-                                                    'lista_posteos':lista_posteos})
+                                                    'lista_posteos':obtener_posteos()})
 
 
 
@@ -110,11 +105,11 @@ def editar_posteo(request, id):
             
             posteo.save()
 
-            return render(request, "usuarios/inicio.html", {'autor':request.user,
-                                                            'mensaje':'Review editada exitosamente.',
-                                                            'avatar':obtener_avatar(request),
-                                                            'usuarios':obtener_usuarios(),
-                                                            'receptores':obtener_receptores(request)})
+            return render(request, "posteos/posteo_detallado.html", {'posteo':posteo,
+                                                                     'mensaje':'Review editado exitosamente!!!',
+                                                                     'avatar':obtener_avatar(request),
+                                                                     'usuarios':obtener_usuarios(),
+                                                                     'receptores':obtener_receptores(request)})
     
     else:
         mi_formulario = PosteoForm(initial={'titulo':posteo.titulo,
