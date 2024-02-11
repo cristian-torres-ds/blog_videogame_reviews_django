@@ -2,7 +2,7 @@ Este es el proyecto final para el curso de Python de Coder House.
 
 Lo hicimos en equipo, Cristian Gabriel Torres y José Gabriel Torres.
 
-Es una aplicación web, hecha con la librería Django, aplicando algunos conocimientos aprendidos durante el curso.
+Es una aplicación web, hecha con la librería Django, aplicando los conocimientos aprendidos durante el curso.
 
 La aplicación se trata de un Blog, con su base de datos y modelos, en el que se pueden ver reviews de video juegos,
 o incluso registrarse y subir reviews propias.
@@ -15,7 +15,7 @@ Para la mensajería se agregó codigo en el archivo css de la carpeta static, pa
 Template mensajería: https://mdbootstrap.com/docs/standard/extended/chat/
 
 
-Todos los usuarios, incluso el administrador tienen la misma contraseña
+Todos los usuarios, incluido admin tienen la misma contraseña
 
 Password: *coderhouse*
 
@@ -34,3 +34,5 @@ Entre los archivos, hay un pdf, con los casos de prueba, y un video 10min con la
 También dejamos un link para ver el video en YouTube:
 
 https://www.youtube.com/watch?v=cXSehSjYGU0
+
+![Devolución](devolucion_del_profesor.png)
